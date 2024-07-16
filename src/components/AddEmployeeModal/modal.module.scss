@@ -1,0 +1,31 @@
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: auto;
+  background-color: rgba($color: gray, $alpha: 0.3);
+  width: 100%;
+  height: 100%;
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    gap: 25px;
+    border-radius: 10px;
+    background-color: white;
+    width: 300px;
+    height: calc(auto + 50px);
+
+    .title {
+      display: flex;
+      justify-content: center;
+      font-size: larger;
+      font-weight: bold;
+    }
+  }
+}
