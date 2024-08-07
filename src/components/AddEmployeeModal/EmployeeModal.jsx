@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Employee } from "../../models/Employee";
 import { addEmployee } from "../../store/employeeSlice";
 import Button from "../Buttons/Button";
-import TextInput from "../Inputs/TextInput";
+import TextInput from "../Inputs/TextInputForModal/TextInput";
 import styles from "./modal.module.scss";
 
 function EmployeeModal({ hideModalFunction = Function.prototype }) {

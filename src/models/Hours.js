@@ -1,13 +1,15 @@
-// export function Hours() {
-//   this.total_hours = 0;
-//   this.night_hours = 0;
-//   this.holiday_hours = 0;
-//   this.order_hours = 0;
-//   this.overtime_hours = 0;
+// class Hours {
+//   constructor() {
+//     this.total_hours = 0;
+//     this.night_hours = 0;
+//     this.holiday_hours = 0;
+//     this.order_hours = 0;
+//     this.overtime_hours = 0;
+//   }
 // }
 
-export function Hours() {
-  let obj = {};
+function Hours() {
+  const obj = {};
 
   obj.total_hours = 0;
   obj.night_hours = 0;
@@ -17,3 +19,5 @@ export function Hours() {
 
   return obj;
 }
+
+export { Hours };

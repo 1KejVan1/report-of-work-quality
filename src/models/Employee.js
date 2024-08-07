@@ -1,18 +1,23 @@
 import { Days } from "./Days";
 import { Hours } from "./Hours";
 
-// export function Employee(name = "") {
-//   this.name = name;
-//   this.days = new Days();
-//   this.hours = new Hours();
+// class Employee {
+//   constructor(name = "") {
+//     this.name = name;
+//     this.days = new Days();
+//     this.hours = new Hours();
+//   }
 // }
 
-export function Employee(name = "") {
-  let obj = {};
+function Employee(name = "") {
+  const obj = {};
 
+  obj.values = new Array(30).fill("");
   obj.name = name;
   obj.days = Days();
   obj.hours = Hours();
 
   return obj;
 }
+
+export { Employee };

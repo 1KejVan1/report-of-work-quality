@@ -1,0 +1,8 @@
+.input {
+  width: inherit;
+  font-size: larger;
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -7,12 +7,6 @@ import styles from "./page.module.scss";
 function MainPage() {
   const state = useSelector((state) => state.employees);
 
-  const rel = {
-    from: 0,
-    to: 10,
-    length: 10,
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.menu}>

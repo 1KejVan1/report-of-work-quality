@@ -1,14 +1,17 @@
-// export function Days() {
-//   this.facts = 0;
-//   this.weekends = 0;
-//   this.A = 0;
-//   this.P = 0;
-//   this.vacation = 0;
-//   this.b_l = 0;
+// class Days {
+//   constructor() {
+//     this.facts = 0;
+//     this.weekends = 0;
+//     this.A = 0;
+//     this.P = 0;
+//     this.vacation = 0;
+//     this.b_l = 0;
+//   }
 // }
 
-export function Days() {
-  let obj = {};
+function Days() {
+  const obj = {};
+
   obj.facts = 0;
   obj.weekends = 0;
   obj.A = 0;
@@ -18,3 +21,5 @@ export function Days() {
 
   return obj;
 }
+
+export { Days };
