@@ -10,20 +10,29 @@ import styles from "./layout.module.scss";
 function Layout() {
   const dispatch = useDispatch();
   const [emp, setEmp] = useState([]);
-  console.log(emp.length);
-
+  const [names] = useState([
+    "Духовский Д. Н.",
+    "Духовский Е. Н.",
+    "Самков Ю. В.",
+    "Разумов А. И.",
+    "Лапицкий Л. М.",
+    "Прохоренко В. И.",
+    "Прокопнёв А. В.",
+    "Колосков Р. М.",
+    "Межевич С. В.",
+  ]);
   useEffect(() => {
     const arr = [];
-    Array.from({ length: 15 }).map((item, index) => {
-      if (emp.length < 15) {
-        arr.push(Employee(index));
+    Array.from({ length: 9 }).map((item, index) => {
+      if (emp.length < 9) {
+        arr.push(Employee(names[index]));
       }
     });
     setEmp(arr);
   }, []);
 
   useEffect(() => {
-    if (emp.length == 15) {
+    if (emp.length == 9) {
       emp.map((item) => dispatch(addEmployee(item)));
     }
   }, [emp]);

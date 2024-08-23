@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { setEmployeeValue } from "../../store/employeeSlice";
-import { TextInputForCell } from "../Inputs/TextInputForCell/TextInput";
-import TableCell from "./Cell/TableCell";
-import TableRow from "./Row/TableRow";
-import styles from "./table.module.scss";
+import { setEmployeeValue } from "../../../store/employeeSlice";
+import { TextInputForCell } from "../../Inputs/TextInputForCell/TextInput";
+import TableCell from "../Cell/TableCell";
+import TableRow from "../Row/TableRow";
+import styles from "./emp_table.module.scss";
 
-function Table() {
+function EmployeeTable() {
   const employees = useSelector((state) => state.employees);
   const dispatch = useDispatch();
 
@@ -30,10 +30,13 @@ function Table() {
                 if (index == 0) {
                   return (
                     <>
-                      <TableCell className="cell_for_name" key={index}>
+                      <TableCell
+                        className="cell_for_name"
+                        key={employee.name + " name_cell"}
+                      >
                         {employee.name}
                       </TableCell>
-                      <TableCell key={index}>
+                      <TableCell key={employee.name + ` cell${index}`}>
                         <TextInputForCell
                           value={item}
                           onChangeValueFunction={setValue}
@@ -45,7 +48,7 @@ function Table() {
                   );
                 } else {
                   return (
-                    <TableCell key={index}>
+                    <TableCell key={employee.name + ` cell${index}`}>
                       <TextInputForCell
                         value={item}
                         onChangeValueFunction={setValue}
@@ -64,4 +67,4 @@ function Table() {
   );
 }
 
-export default Table;
+export default EmployeeTable;

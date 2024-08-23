@@ -7,20 +7,29 @@
 
   .menu {
     width: 90%;
-    // align-self: flex-end;
   }
 
   .work_area {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
     background-color: red;
     width: inherit;
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
-    // max-width: 1000px;
     max-height: 800px;
-    overflow-x: auto;
+
+    .emp_area {
+      width: 60%;
+      padding: 5px 0px;
+      overflow-x: auto;
+    }
+
+    .total_area {
+      width: 20%;
+      padding: 5px 0px;
+      overflow-x: auto;
+    }
   }
 }
