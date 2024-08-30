@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 95%;
+  width: 98%;
   margin-top: 50px;
   gap: 30px;
 
@@ -11,25 +11,12 @@
 
   .work_area {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
     background-color: red;
     width: inherit;
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
-    max-height: 800px;
-
-    .emp_area {
-      width: 60%;
-      padding: 5px 0px;
-      overflow-x: auto;
-    }
-
-    .total_area {
-      width: 20%;
-      padding: 5px 0px;
-      overflow-x: auto;
-    }
   }
 }

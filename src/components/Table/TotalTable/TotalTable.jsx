@@ -17,7 +17,7 @@ function TotalTable() {
         {arr.map((item, index) => {
           return (
             <TableRow key={index}>
-              {Array.from({ length: 6 }).map((item) => {
+              {Array.from({ length: 7 }).map((item) => {
                 return (
                   <TableCell>
                     <TextInputForCell value="123" />

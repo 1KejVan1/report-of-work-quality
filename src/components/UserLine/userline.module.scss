@@ -1,0 +1,55 @@
+.container {
+  display: grid;
+  grid-template-columns: 150px fit-content(800px) auto;
+  grid-template-rows: repeat(2, 100%);
+
+  .names_col {
+    display: grid;
+    align-items: center;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    .name {
+      grid-row-start: 1;
+      grid-row-end: 1;
+    }
+
+    .night_name {
+      grid-row-start: 2;
+      grid-row-end: 2;
+    }
+  }
+
+  .cells_col {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    overflow-x: auto;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    margin-right: 35px;
+
+    .days,
+    .night {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .total_col {
+    display: flex;
+    flex-direction: row;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 3;
+    gap: 10px;
+
+    .total_days,
+    .total_hours {
+      display: flex;
+      flex-direction: row;
+      max-width: 200px;
+      overflow-x: auto;
+    }
+  }
+}

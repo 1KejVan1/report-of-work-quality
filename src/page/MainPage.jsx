@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Menu from "../components/Menu/Menu";
 import EmployeeTable from "../components/Table/EmployeeTable/EmployeeTable";
 import TotalTable from "../components/Table/TotalTable/TotalTable";
+import UserLine from "../components/UserLine/UserLine";
 import styles from "./page.module.scss";
 
 function MainPage() {
@@ -14,14 +15,9 @@ function MainPage() {
         <Menu />
       </div>
       <div className={styles.work_area}>
-        <div className={styles.emp_area}>
-          Сотрудники
-          <EmployeeTable />
-        </div>
-        <div className={styles.total_area}>
-          ДНИ
-          <TotalTable />
-        </div>
+        {state.map((employee) => {
+          return <UserLine userName={employee.name} />;
+        })}
       </div>
     </div>
   );
