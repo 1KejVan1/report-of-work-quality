@@ -10,13 +10,56 @@
   }
 
   .work_area {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 150px 60% 15% 15%;
     gap: 10px;
     background-color: red;
     width: inherit;
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
+
+    .col_1 {
+      grid-column-start: 1;
+    }
+
+    .col_2 {
+      grid-column-start: 2;
+      max-width: 800px;
+      overflow-x: auto;
+    }
+
+    .col_3 {
+      grid-column-start: 3;
+    }
+
+    .col_4 {
+      grid-column-start: 4;
+    }
+
+    .col_3,
+    .col_4 {
+      max-width: 150px;
+      overflow-x: auto;
+    }
+
+    .row {
+      display: grid;
+      grid-template-rows: repeat(2, 50px);
+      align-items: center;
+    }
+
+    .row_1 {
+      grid-row-start: 1;
+    }
+
+    .row_2 {
+      grid-row-start: 2;
+    }
+
+    .row_cells {
+      display: flex;
+      flex-direction: row;
+    }
   }
 }

@@ -12,7 +12,8 @@ import { Hours } from "./Hours";
 function Employee(name = "") {
   const obj = {};
 
-  obj.values = new Array(30).fill("");
+  obj.day_values = new Array(30).fill("");
+  obj.night_values = new Array(30).fill("");
   obj.name = name;
   obj.days = Days();
   obj.hours = Hours();
