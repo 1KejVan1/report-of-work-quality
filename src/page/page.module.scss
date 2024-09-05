@@ -11,13 +11,30 @@
 
   .work_area {
     display: grid;
+    grid-template-rows: 100px max-content;
     grid-template-columns: 150px 60% 15% 15%;
-    gap: 10px;
     background-color: red;
-    width: inherit;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px 20px;
+    gap: 0px 20px;
+
+    .info_container {
+      display: grid;
+      align-items: center;
+      grid-template-columns: inherit;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      gap: 0px 20px;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: inherit;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      gap: 0px 20px;
+    }
 
     .col_1 {
       grid-column-start: 1;
@@ -27,6 +44,10 @@
       grid-column-start: 2;
       max-width: 800px;
       overflow-x: auto;
+    }
+
+    .over_hidden {
+      overflow: hidden;
     }
 
     .col_3 {
@@ -41,6 +62,10 @@
     .col_4 {
       max-width: 150px;
       overflow-x: auto;
+    }
+
+    .grid {
+      display: grid;
     }
 
     .row {
