@@ -1,14 +1,6 @@
 import { Days } from "./Days";
 import { Hours } from "./Hours";
 
-// class Employee {
-//   constructor(name = "") {
-//     this.name = name;
-//     this.days = new Days();
-//     this.hours = new Hours();
-//   }
-// }
-
 function Employee(name = "") {
   const obj = {};
 
@@ -17,6 +9,20 @@ function Employee(name = "") {
   obj.name = name;
   obj.days = Days();
   obj.hours = Hours();
+  obj.sumNightHours = function () {
+    this.hours.night_hours = this.night_values.reduce((accum, curr) => {
+      accum += curr;
+    }, 0);
+  };
+  obj.sumTotalHours = function () {
+    this.hours.total_hours =
+      this.day_values.reduce((accum, curr) => {
+        accum += curr;
+      }, 0) +
+      this.night_values.reduce((accum, curr) => {
+        accum += curr;
+      }, 0);
+  };
 
   return obj;
 }

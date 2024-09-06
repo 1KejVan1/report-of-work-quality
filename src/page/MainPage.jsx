@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { TextInputForCell } from "../components/Inputs/TextInputForCell/TextInput";
 import Menu from "../components/Menu/Menu";
 import TableCell from "../components/Table/Cell/TableCell";
+import { daysNames, hoursNames } from "../constants/constants";
+import { CellType } from "../enums/CellType";
 import styles from "./page.module.scss";
 
 function MainPage() {
@@ -13,7 +15,6 @@ function MainPage() {
   const info_container_col2 = useRef(null);
   const info_container_col3 = useRef(null);
   const info_container_col4 = useRef(null);
-  function scroll() {}
 
   function scrollCol2(e) {
     info_container_col2.current.scrollLeft = e.target.scrollLeft;
@@ -45,8 +46,8 @@ function MainPage() {
               <div className={styles.row_cells}>
                 {Array.from({ length: 30 }).map((item, index) => {
                   return (
-                    <TableCell>
-                      <TextInputForCell value={index} />
+                    <TableCell type={CellType.FOR_NUMBERS}>
+                      <span>{index}</span>
                     </TableCell>
                   );
                 })}
@@ -60,10 +61,10 @@ function MainPage() {
           >
             <div className={styles.grid}>
               <div className={styles.row_cells}>
-                {Array.from({ length: 6 }).map((item) => {
+                {daysNames.map((dayName) => {
                   return (
-                    <TableCell>
-                      <TextInputForCell value="2" />
+                    <TableCell type={CellType.FOR_DAYS_AND_HOURS}>
+                      {dayName}
                     </TableCell>
                   );
                 })}
@@ -77,10 +78,10 @@ function MainPage() {
           >
             <div className={styles.grid}>
               <div className={styles.row_cells}>
-                {Array.from({ length: 6 }).map((item) => {
+                {hoursNames.map((hourName) => {
                   return (
-                    <TableCell>
-                      <TextInputForCell value="2" />
+                    <TableCell type={CellType.FOR_DAYS_AND_HOURS}>
+                      {hourName}
                     </TableCell>
                   );
                 })}
@@ -107,7 +108,7 @@ function MainPage() {
                     {emp.day_values.map((value) => {
                       return (
                         <TableCell>
-                          <TextInputForCell value="1" />
+                          <TextInputForCell value="Д" />
                         </TableCell>
                       );
                     })}
@@ -116,7 +117,7 @@ function MainPage() {
                     {emp.night_values.map((value) => {
                       return (
                         <TableCell>
-                          <TextInputForCell value="2" />
+                          <TextInputForCell value="Ч" />
                         </TableCell>
                       );
                     })}

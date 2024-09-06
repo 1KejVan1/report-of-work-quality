@@ -6,9 +6,35 @@
   margin: 0px;
 }
 
+.cell_for_days_and_hours {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  margin: 0px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  user-select: none;
+}
+
 .cell_for_name {
   display: flex;
   align-items: center;
   width: 150px;
   font-size: large;
+}
+
+.cell_for_numbers_of_month {
+  display: flex;
+  align-items: center;
+  width: 35px;
+  height: 30px;
+  margin: 0px;
+
+  & > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+  }
 }
