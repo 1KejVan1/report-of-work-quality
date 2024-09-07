@@ -131,7 +131,7 @@ function MainPage() {
               return (
                 <div className={styles.row}>
                   <div className={classNames(styles.row_cells, styles.row_1)}>
-                    {Array.from({ length: 6 }).map((value) => {
+                    {daysNames.map((value) => {
                       return (
                         <TableCell>
                           <TextInputForCell value="3" />
@@ -148,7 +148,7 @@ function MainPage() {
               return (
                 <div className={styles.row}>
                   <div className={classNames(styles.row_cells, styles.row_1)}>
-                    {Array.from({ length: 6 }).map((value) => {
+                    {hoursNames.map((value) => {
                       return (
                         <TableCell>
                           <TextInputForCell value="4" />

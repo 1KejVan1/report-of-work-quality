@@ -12,12 +12,13 @@
   .work_area {
     display: grid;
     grid-template-rows: 120px max-content;
-    grid-template-columns: 150px 60% 15% 15%;
+    grid-template-columns: 150px auto auto auto;
     background-color: red;
     border: 1px solid black;
     border-radius: 10px;
     padding: 10px 20px;
     gap: 0px 20px;
+    overflow-x: auto;
 
     .info_container {
       display: grid;
@@ -25,7 +26,7 @@
       grid-template-columns: inherit;
       grid-column-start: 1;
       grid-column-end: 4;
-      gap: 0px 20px;
+      gap: 0px 50px;
     }
 
     .content {
@@ -33,17 +34,20 @@
       grid-template-columns: inherit;
       grid-column-start: 1;
       grid-column-end: 4;
-      gap: 0px 20px;
+      width: 100%;
+      gap: 0px 50px;
     }
 
     .col_1 {
       grid-column-start: 1;
+      min-width: 100px;
     }
 
     .col_2 {
       grid-column-start: 2;
-      max-width: 800px;
+      max-width: 100%;
       overflow-x: auto;
+      min-width: 200px;
     }
 
     .over_hidden {
@@ -52,15 +56,17 @@
 
     .col_3 {
       grid-column-start: 3;
+      min-width: 100px;
     }
 
     .col_4 {
       grid-column-start: 4;
+      min-width: 100px;
     }
 
     .col_3,
     .col_4 {
-      max-width: 150px;
+      width: 100%;
       overflow-x: auto;
     }
 
