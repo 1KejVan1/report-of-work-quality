@@ -11,7 +11,7 @@
 
   .work_area {
     display: grid;
-    grid-template-rows: 120px max-content;
+    grid-template-rows: 120px max-content 120px;
     grid-template-columns: 150px auto auto auto;
     background-color: red;
     border: 1px solid black;
@@ -74,7 +74,7 @@
       display: grid;
     }
 
-    .row {
+    .two_rows {
       display: grid;
       grid-template-rows: repeat(2, 50px);
       align-items: center;
@@ -88,9 +88,18 @@
       grid-row-start: 2;
     }
 
+    .row_3 {
+      margin-top: 20px;
+      grid-row-start: 3;
+    }
+
     .row_cells {
       display: flex;
       flex-direction: row;
     }
+  }
+
+  .total_row {
+    margin: 30px 0px;
   }
 }
