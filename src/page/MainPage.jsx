@@ -8,7 +8,6 @@ import Menu from "../components/Menu/Menu";
 import TableCell from "../components/Table/Cell/TableCell";
 import { daysNames, hoursNames } from "../constants/constants";
 import { CellType } from "../enums/CellType";
-import { Employee } from "../models/Employee";
 import {
   setEmployeeDayValue,
   setEmployeeNightValue,
@@ -18,14 +17,15 @@ import {
 import styles from "./page.module.scss";
 
 function MainPage() {
-  const employees = useSelector((state) => state.employees);
+  const employees = useSelector((state) => state.employees.employees);
   const dispatch = useDispatch();
-  const [daysAndHoursNames] = useState(Employee());
   const info_container_col2 = useRef(null);
   const info_container_col3 = useRef(null);
   const info_container_col4 = useRef(null);
 
-  function scrollCol2(e = HTMLDivElement.prototype) {
+  function scrollCol2(e) {
+    console.log(e instanceof UIEvent);
+
     info_container_col2.current.scrollLeft = e.target.scrollLeft;
   }
 
@@ -46,6 +46,7 @@ function MainPage() {
       }),
     );
   }
+
   function changeNightValue(employeeName, value, index) {
     dispatch(
       setEmployeeNightValue({
@@ -109,7 +110,7 @@ function MainPage() {
           >
             <div className={styles.grid}>
               <div className={styles.row_cells}>
-                {daysAndHoursNames.days.map((day) => {
+                {daysNames.map((day) => {
                   return (
                     <TableCell type={CellType.FOR_DAYS_AND_HOURS}>
                       {day.rus_title}
@@ -126,7 +127,7 @@ function MainPage() {
           >
             <div className={styles.grid}>
               <div className={styles.row_cells}>
-                {daysAndHoursNames.hours.map((hour) => {
+                {hoursNames.map((hour) => {
                   return (
                     <TableCell type={CellType.FOR_DAYS_AND_HOURS}>
                       {hour.rus_title}
@@ -192,13 +193,14 @@ function MainPage() {
               return (
                 <div className={styles.two_rows}>
                   <div className={classNames(styles.row_cells, styles.row_1)}>
-                    {emp.days.map((day) => {
+                    {Object.entries(emp.days).map(([key, value]) => {
+                      // const [key, value] = Object.entries(day);
                       return (
                         <TableCell>
                           <TextInputForCell
-                            propertyName={day.eng_title}
+                            propertyName={key}
                             isDayCell
-                            value={day.value}
+                            value={value}
                             employeeName={emp.name}
                             onChangeValueFunction={changeTotalDaysValue}
                           />
@@ -226,13 +228,13 @@ function MainPage() {
               return (
                 <div className={styles.two_rows}>
                   <div className={classNames(styles.row_cells, styles.row_1)}>
-                    {emp.hours.map((hour) => {
+                    {Object.entries(emp.hours).map(([key, value]) => {
                       return (
                         <TableCell>
                           <TextInputForCell
-                            propertyName={hour.eng_title}
+                            propertyName={key}
                             isDayCell
-                            value={hour.value}
+                            value={value}
                             employeeName={emp.name}
                             onChangeValueFunction={changeTotalHoursValue}
                           />
