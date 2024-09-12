@@ -14,6 +14,7 @@ import {
 } from "../../store/employeeSlice";
 import EmployeeModal from "../AddEmployeeModal/EmployeeModal";
 import Button from "../Buttons/Button";
+import DatePicker from "../DatePicker/DatePicker";
 import styles from "./menu.module.scss";
 
 function Menu() {
@@ -40,6 +41,7 @@ function Menu() {
       {show && <EmployeeModal hideModalFunction={showModal} />}
       <Button text="Добавить сотрудника" onClickFunction={showModal} />
       <Button text="Посчитать" onClickFunction={calcAllDays} />
+      <DatePicker />
     </div>
   );
 }

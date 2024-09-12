@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useContext } from "react";
 
 import { useDispatch } from "react-redux";
 
+import { DateContext } from "../../Context/DateContext";
 import { Employee } from "../../models/Employee";
 import { addEmployee } from "../../store/employeeSlice";
 import Button from "../Buttons/Button";
@@ -11,6 +13,7 @@ import styles from "./modal.module.scss";
 function EmployeeModal({ hideModalFunction = Function.prototype }) {
   const [employeeName, setEmployeeName] = useState("");
   const dispatch = useDispatch();
+  const { date } = useContext(DateContext);
 
   function hideModal() {
     hideModalFunction();
@@ -27,7 +30,11 @@ function EmployeeModal({ hideModalFunction = Function.prototype }) {
 
   function submit() {
     if (employeeName) {
-      dispatch(addEmployee(Employee(employeeName)));
+      dispatch(
+        addEmployee(
+          Employee(employeeName, date.selectedMonth, date.selectedYear),
+        ),
+      );
       hideModal();
     }
   }

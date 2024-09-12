@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  .picker {
+    position: relative;
+    text-align: center;
+    font-size: large;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid black;
+
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      background: transparent;
+      color: transparent;
+      height: auto;
+      width: auto;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}

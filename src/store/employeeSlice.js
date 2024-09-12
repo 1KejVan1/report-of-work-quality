@@ -1,3 +1,5 @@
+import { act } from "react";
+
 import { createSlice } from "@reduxjs/toolkit";
 
 import { AbbreviatureOfDays } from "../enums/AbbreviatureOfDays";
@@ -136,6 +138,27 @@ const employeesSlice = createSlice({
         }, 0);
       });
     },
+
+    resizeArrays(state, action) {
+      state.employees.map((emp = Employee()) => {
+        const diff = action.payload.daysPerMonth - emp.day_values.length;
+        console.log(diff);
+
+        if (diff < 0) {
+          console.log("diff меньше");
+          emp.day_values = emp.day_values.slice(
+            0,
+            emp.day_values.length - 1 - diff,
+          );
+        } else if (diff > 0) {
+          console.log("дифф больше");
+
+          for (let i = 0; i < diff; i++) {
+            emp.day_values.push("");
+          }
+        }
+      });
+    },
   },
 });
 
@@ -155,4 +178,5 @@ export const {
   calculateVacationsDays,
   calculateBisTripDays,
   calculateNightHours,
+  resizeArrays,
 } = employeesSlice.actions;

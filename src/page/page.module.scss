@@ -11,7 +11,7 @@
 
   .work_area {
     display: grid;
-    grid-template-rows: 120px max-content 120px;
+    grid-template-rows: 50px 120px max-content;
     grid-template-columns: 150px auto auto auto;
     background-color: red;
     border: 1px solid black;
@@ -19,6 +19,16 @@
     padding: 10px 20px;
     gap: 0px 20px;
     overflow-x: auto;
+
+    .date_info {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      padding: 10px;
+      font-size: larger;
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
 
     .info_container {
       display: grid;
@@ -89,8 +99,12 @@
     }
 
     .row_3 {
-      margin-top: 20px;
       grid-row-start: 3;
+    }
+
+    .row_4 {
+      margin-top: 20px;
+      grid-row-start: 4;
     }
 
     .row_cells {
