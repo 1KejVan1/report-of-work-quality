@@ -4,8 +4,8 @@ import { Hours } from "./Hours";
 function Employee(name = "", selectedMonth = 1, selectedYear = 2000) {
   const emp = {};
   const daysPerMonth = defineDaysPerMonth(selectedMonth, selectedYear);
-  emp.day_values = new Array(daysPerMonth).fill("");
-  emp.night_values = new Array(daysPerMonth).fill("");
+  emp.day_values = new Array(defineDaysPerMonth()).fill("");
+  emp.night_values = new Array(defineDaysPerMonth()).fill("");
   emp.name = name;
   emp.days = Days();
   emp.hours = Hours();

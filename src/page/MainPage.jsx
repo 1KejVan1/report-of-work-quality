@@ -186,10 +186,12 @@ function MainPage() {
           </div>
           <div className={classNames(styles.row_3, styles.content)}>
             <div className={styles.col_1}>
-              {employees.map((emp) => {
+              {employees.map((emp, index) => {
                 return (
                   <div className={styles.two_rows}>
-                    <div>{emp.name}</div>
+                    <div>
+                      {index + 1}. {emp.name}
+                    </div>
                     <div>Ночные</div>
                   </div>
                 );
