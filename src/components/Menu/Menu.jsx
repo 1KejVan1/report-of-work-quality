@@ -39,8 +39,12 @@ function Menu() {
   return (
     <div className={styles.container}>
       {show && <EmployeeModal hideModalFunction={showModal} />}
-      <Button text="Добавить сотрудника" onClickFunction={showModal} />
-      <Button text="Посчитать" onClickFunction={calcAllDays} />
+      <Button text="" onClickFunction={showModal}>
+        Добавить сотрудника
+      </Button>
+      <Button text="Посчитать" onClickFunction={calcAllDays}>
+        Посчитать
+      </Button>
       <DatePicker />
     </div>
   );

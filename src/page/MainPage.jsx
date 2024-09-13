@@ -4,6 +4,8 @@ import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
 import { DateContext } from "../Context/DateContext";
+import DeleteButton from "../components/Buttons/DeleteButton/DeleteButton";
+import EditButton from "../components/Buttons/EditButton/EditButton";
 import { TextInputForCell } from "../components/Inputs/TextInputForCell/TextInput";
 import Menu from "../components/Menu/Menu";
 import TableCell from "../components/Table/Cell/TableCell";
@@ -189,10 +191,16 @@ function MainPage() {
               {employees.map((emp, index) => {
                 return (
                   <div className={styles.two_rows}>
-                    <div>
-                      {index + 1}. {emp.name}
+                    <div className={styles.name_container}>
+                      <div className={styles.button_container}>
+                        <DeleteButton />
+                        <EditButton />
+                      </div>
+                      <div className={styles.name}>
+                        {`${index + 1}. ${emp.name}`}
+                      </div>
                     </div>
-                    <div>Ночные</div>
+                    <div className={styles.night_title}>Ночные</div>
                   </div>
                 );
               })}

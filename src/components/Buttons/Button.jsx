@@ -1,9 +1,18 @@
+import React, { Children } from "react";
+
 import styles from "./button.module.scss";
 
-function Button({ text = "", onClickFunction = Function.prototype }) {
+function Button({
+  children,
+  onClickFunction = Function.prototype,
+  buttonType = "",
+}) {
   return (
-    <button className={styles.button} onClick={onClickFunction}>
-      {text}
+    <button
+      className={buttonType ? buttonType : styles.button}
+      onClick={onClickFunction}
+    >
+      {children}
     </button>
   );
 }
