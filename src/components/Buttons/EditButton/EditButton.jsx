@@ -20,8 +20,8 @@ function EditButton({ onClickFunction = Function.prototype }) {
   }
 
   function handleMouseMove(e = MouseEvent.prototype) {
-    setTooltipPosX(e.clientX);
-    setTooltipPosY(e.clientY);
+    setTooltipPosX(e.pageX);
+    setTooltipPosY(e.pageY);
   }
 
   return (

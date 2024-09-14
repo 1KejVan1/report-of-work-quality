@@ -1,25 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import React, {
+  createRef,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
 import { DateContext } from "../Context/DateContext";
-import DeleteButton from "../components/Buttons/DeleteButton/DeleteButton";
-import EditButton from "../components/Buttons/EditButton/EditButton";
 import { TextInputForCell } from "../components/Inputs/TextInputForCell/TextInput";
 import Menu from "../components/Menu/Menu";
 import TableCell from "../components/Table/Cell/TableCell";
+import UserLine from "../components/UserLine/UserLine";
 import { daysNames, hoursNames } from "../constants/constants";
 import { CellType } from "../enums/CellType";
 import { DateModel } from "../models/Date";
 import { defineDaysPerMonth } from "../models/Employee";
-import {
-  resizeArrays,
-  setEmployeeDayValue,
-  setEmployeeNightValue,
-  setTotalDaysValue,
-  setTotalHoursValue,
-} from "../store/employeeSlice";
+import { resizeArrays } from "../store/employeeSlice";
 import styles from "./page.module.scss";
 
 function MainPage() {
@@ -29,53 +28,52 @@ function MainPage() {
   const info_container_col2 = useRef(null);
   const info_container_col3 = useRef(null);
   const info_container_col4 = useRef(null);
+  const [refCol2Array, setRefCol2Array] = useState([]);
+  const [refCol3Array, setRefCol3Array] = useState([]);
+  const [refCol4Array, setRefCol4Array] = useState([]);
 
   useEffect(() => {
-    // console.log(1);
-
     resizeEmpArrays();
   }, [graficDate]);
 
+  useEffect(() => {
+    setRefCol2Array(fillRefArray());
+    setRefCol3Array(fillRefArray());
+    setRefCol4Array(fillRefArray());
+  }, [employees]);
+
+  function fillRefArray() {
+    const arr = [];
+
+    for (let i = 0; i < employees.length; i++) {
+      arr.push(React.createRef(null));
+    }
+
+    return arr;
+  }
+
   function scrollCol2(e) {
     info_container_col2.current.scrollLeft = e.target.scrollLeft;
+
+    refCol2Array.map((item = React.createRef(null)) => {
+      item.current.scrollLeft = e.target.scrollLeft;
+    });
   }
 
   function scrollCol3(e) {
     info_container_col3.current.scrollLeft = e.target.scrollLeft;
+
+    refCol3Array.map((item = React.createRef(null)) => {
+      item.current.scrollLeft = e.target.scrollLeft;
+    });
   }
 
   function scrollCol4(e) {
     info_container_col4.current.scrollLeft = e.target.scrollLeft;
-  }
 
-  function changeDayValue(employeeName, value, index) {
-    dispatch(
-      setEmployeeDayValue({
-        name: employeeName,
-        valueIndex: index,
-        value: value,
-      }),
-    );
-  }
-
-  function changeNightValue(employeeName, value, index) {
-    dispatch(
-      setEmployeeNightValue({
-        name: employeeName,
-        valueIndex: index,
-        value: value,
-      }),
-    );
-  }
-
-  function changeTotalDaysValue(employeeName, propertyName, value) {
-    dispatch(
-      setTotalDaysValue({
-        name: employeeName,
-        propertyName: propertyName,
-        value: value,
-      }),
-    );
+    refCol4Array.map((item = React.createRef(null)) => {
+      item.current.scrollLeft = e.target.scrollLeft;
+    });
   }
 
   function getMonthName(month = 2, year = 2000) {
@@ -89,16 +87,6 @@ function MainPage() {
       month: "long",
       year: "numeric",
     }).format(new Date(year, month));
-  }
-
-  function changeTotalHoursValue(employeeName, propertyName, value) {
-    dispatch(
-      setTotalHoursValue({
-        name: employeeName,
-        propertyName: propertyName,
-        value: value,
-      }),
-    );
   }
 
   function resizeEmpArrays() {
@@ -139,7 +127,7 @@ function MainPage() {
                         graficDate.selectedMonth,
                         graficDate.selectedYear,
                       ) + 1,
-                  }).map((item, index) => {
+                  }).map((_, index) => {
                     if (index > 0) {
                       return (
                         <TableCell type={CellType.FOR_NUMBERS}>
@@ -187,123 +175,61 @@ function MainPage() {
             </div>
           </div>
           <div className={classNames(styles.row_3, styles.content)}>
-            <div className={styles.col_1}>
-              {employees.map((emp, index) => {
-                return (
-                  <div className={styles.two_rows}>
-                    <div className={styles.name_container}>
-                      <div className={styles.button_container}>
-                        <DeleteButton />
-                        <EditButton />
-                      </div>
-                      <div className={styles.name}>
-                        {`${index + 1}. ${emp.name}`}
-                      </div>
-                    </div>
-                    <div className={styles.night_title}>Ночные</div>
-                  </div>
-                );
-              })}
-              <div className={classNames(styles.two_rows, styles.total_row)}>
-                <div>Итого</div>
+            {employees.map((emp, index) => {
+              return (
+                <UserLine
+                  employee={emp}
+                  employeeNumber={index + 1}
+                  refCol2={refCol2Array[index]}
+                  refCol3={refCol3Array[index]}
+                  refCol4={refCol4Array[index]}
+                />
+              );
+            })}
+            <div className={classNames(styles.total_row, styles.col_1)}>
+              <div className={classNames(styles.two_rows)}>Итого</div>
+            </div>
+            <div
+              className={classNames(styles.total_row, styles.col_2)}
+              onScroll={scrollCol2}
+            >
+              <div className={styles.two_rows}>
+                <div className={styles.row_cells}>
+                  {Array.from({
+                    length:
+                      defineDaysPerMonth(
+                        graficDate.selectedMonth,
+                        graficDate.selectedYear,
+                      ) + 1,
+                  }).map(() => {
+                    return <TableCell />;
+                  })}
+                </div>
               </div>
             </div>
-            <div className={styles.col_2} onScroll={scrollCol2}>
-              {employees.map((emp) => {
-                return (
-                  <div className={styles.two_rows}>
-                    <div className={styles.row_cells}>
-                      {emp.day_values.map((value, index) => {
-                        return (
-                          <TableCell>
-                            <TextInputForCell
-                              value={value}
-                              employeeName={emp.name}
-                              valueIndex={index}
-                              onChangeValueFunction={changeDayValue}
-                            />
-                          </TableCell>
-                        );
-                      })}
-                    </div>
-                    <div className={styles.row_cells}>
-                      {emp.night_values.map((value, index) => {
-                        return (
-                          <TableCell>
-                            <TextInputForCell
-                              value={value}
-                              employeeName={emp.name}
-                              valueIndex={index}
-                              onChangeValueFunction={changeNightValue}
-                            />
-                          </TableCell>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <div className={styles.col_3} onScroll={scrollCol3}>
-              {employees.map((emp) => {
-                return (
-                  <div className={styles.two_rows}>
-                    <div className={classNames(styles.row_cells, styles.row_1)}>
-                      {Object.entries(emp.days).map(([key, value]) => {
-                        // const [key, value] = Object.entries(day);
-                        return (
-                          <TableCell>
-                            <TextInputForCell
-                              propertyName={key}
-                              isDayCell
-                              value={value}
-                              employeeName={emp.name}
-                              onChangeValueFunction={changeTotalDaysValue}
-                            />
-                          </TableCell>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-              <div className={classNames(styles.two_rows, styles.total_row)}>
+            <div
+              className={classNames(styles.total_row, styles.col_3)}
+              onScroll={scrollCol3}
+            >
+              <div className={styles.two_rows}>
                 <div className={classNames(styles.row_cells, styles.row_1)}>
-                  {daysNames.map((value) => {
+                  {daysNames.map(() => {
                     return (
                       <TableCell>
-                        <TextInputForCell value={""} />
+                        <TextInputForCell value="" />
                       </TableCell>
                     );
                   })}
                 </div>
               </div>
             </div>
-            <div className={styles.col_4} onScroll={scrollCol4}>
-              {employees.map((emp) => {
-                return (
-                  <div className={styles.two_rows}>
-                    <div className={classNames(styles.row_cells, styles.row_1)}>
-                      {Object.entries(emp.hours).map(([key, value]) => {
-                        return (
-                          <TableCell>
-                            <TextInputForCell
-                              propertyName={key}
-                              isDayCell
-                              value={value}
-                              employeeName={emp.name}
-                              onChangeValueFunction={changeTotalHoursValue}
-                            />
-                          </TableCell>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-              <div className={classNames(styles.two_rows, styles.total_row)}>
+            <div
+              className={classNames(styles.total_row, styles.col_4)}
+              onScroll={scrollCol4}
+            >
+              <div className={styles.two_rows}>
                 <div className={classNames(styles.row_cells, styles.row_1)}>
-                  {hoursNames.map((value) => {
+                  {hoursNames.map(() => {
                     return (
                       <TableCell>
                         <TextInputForCell value="" />

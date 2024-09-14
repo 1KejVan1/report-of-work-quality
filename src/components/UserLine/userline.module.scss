@@ -1,0 +1,74 @@
+.name_container {
+  display: grid;
+  grid-template-columns: 90px auto;
+  grid-template-rows: repeat(2, 50px);
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  align-items: center;
+
+  .button_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    grid-row-start: 1;
+    grid-column-start: 1;
+  }
+
+  .name {
+    grid-row-start: 1;
+    grid-column-start: 2;
+  }
+  .night_title {
+    grid-row-start: 2;
+    grid-column-start: 2;
+  }
+}
+
+.col_1 {
+  grid-column-start: 1;
+  min-width: 100px;
+}
+
+.col_2 {
+  grid-column-start: 2;
+  max-width: 100%;
+  overflow-x: hidden;
+  min-width: 200px;
+}
+
+.col_3 {
+  grid-column-start: 3;
+  min-width: 100px;
+}
+
+.col_4 {
+  grid-column-start: 4;
+  min-width: 100px;
+}
+
+.col_3,
+.col_4 {
+  width: 100%;
+  overflow: hidden;
+}
+
+.two_rows {
+  display: grid;
+  grid-template-rows: repeat(2, 50px);
+  align-items: center;
+}
+
+.row_1 {
+  grid-row-start: 1;
+}
+
+.row_2 {
+  grid-row-start: 2;
+}
+
+.row_cells {
+  display: flex;
+  flex-direction: row;
+}
