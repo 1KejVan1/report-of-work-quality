@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: center;
+  padding: 0px 10px;
+  width: 230px;
+  height: 50px;
+  border-radius: 10px;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  background-color: wheat;
+  border: 1px solid black;
+  z-index: 1;
+
+  .main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .title_container {
+      display: flex;
+      width: 70%;
+      font-size: larger;
+      user-select: none;
+    }
+
+    .button_container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+
+      .icon {
+        font-size: 30px;
+        color: black;
+        transition: 0.2s all;
+
+        &:hover {
+          cursor: pointer;
+          scale: 1.2;
+        }
+      }
+    }
+  }
+
+  .progress_bar_container {
+    display: flex;
+    width: 90%;
+    height: 5px;
+    position: absolute;
+    bottom: 0;
+    left: auto;
+    right: auto;
+
+    .progress_bar {
+      background-color: black;
+      border-radius: 10px;
+      transition: 100ms all;
+    }
+  }
+}

@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { useContext } from "react";
 
-import { useDispatch } from "react-redux";
-
-import { DateContext } from "../../Context/DateContext";
-import { Employee } from "../../models/Employee";
-import { addEmployee } from "../../store/employeeSlice";
 import Button from "../Buttons/Button";
 import TextInput from "../Inputs/TextInputForModal/TextInput";
 import styles from "./modal.module.scss";
 
-function EmployeeModal({ hideModalFunction = Function.prototype }) {
-  const [employeeName, setEmployeeName] = useState("");
-  const dispatch = useDispatch();
-  const { date } = useContext(DateContext);
+function EmployeeModal({
+  hideModalFunction = Function.prototype,
+  onSubmitFunction = Function.prototype,
+  currentName = "",
+}) {
+  const [employeeName, setEmployeeName] = useState(currentName);
 
   function hideModal() {
     hideModalFunction();
@@ -30,11 +26,7 @@ function EmployeeModal({ hideModalFunction = Function.prototype }) {
 
   function submit() {
     if (employeeName) {
-      dispatch(
-        addEmployee(
-          Employee(employeeName, date.selectedMonth, date.selectedYear),
-        ),
-      );
+      onSubmitFunction(employeeName);
       hideModal();
     }
   }
@@ -49,7 +41,7 @@ function EmployeeModal({ hideModalFunction = Function.prototype }) {
           placeholder="Иванов И. И."
           labelText="Фамилия и инициалы"
         />
-        <Button text="Добавить" onClickFunction={submit} />
+        <Button onClickFunction={submit}>Добавить</Button>
       </div>
     </div>
   );

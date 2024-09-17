@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useContext } from "react";
 
 import { useDispatch } from "react-redux";
 
+import { DateContext } from "../../Context/DateContext";
+import { Employee } from "../../models/Employee";
 import {
+  addEmployee as addEmployeeAction,
   calculateAbsenceDays,
   calculateActualDays,
   calculateAtYourExpenceDays,
@@ -20,6 +24,7 @@ import styles from "./menu.module.scss";
 function Menu() {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
+  const { date } = useContext(DateContext);
 
   function showModal() {
     setShow((prev) => !prev);
@@ -36,9 +41,22 @@ function Menu() {
     dispatch(calculateNightHours());
   }
 
+  function addEmployee(employeeName) {
+    dispatch(
+      addEmployeeAction(
+        Employee(employeeName, date.selectedMonth, date.selectedYear),
+      ),
+    );
+  }
+
   return (
     <div className={styles.container}>
-      {show && <EmployeeModal hideModalFunction={showModal} />}
+      {show && (
+        <EmployeeModal
+          hideModalFunction={showModal}
+          onSubmitFunction={addEmployee}
+        />
+      )}
       <Button text="" onClickFunction={showModal}>
         Добавить сотрудника
       </Button>

@@ -9,7 +9,7 @@ function Employee(name = "", selectedMonth = 1, selectedYear = 2000) {
   emp.name = name;
   emp.days = Days();
   emp.hours = Hours();
-
+  emp.isDeleted = false;
   return emp;
 }
 

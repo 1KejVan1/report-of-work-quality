@@ -1,14 +1,23 @@
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
 
-import { daysNames } from "../../constants/constants";
+import { DeletedEmployeesContext } from "../../Context/DeletedEmployees";
 import { Employee } from "../../models/Employee";
 import {
+  deleteEmployee as deleteEmployeeAction,
+  hideEmployee as hideEmployeeAction,
+  renameEmployee as renameEmployeeAction,
   setEmployeeDayValue,
   setEmployeeNightValue,
   setTotalDaysValue,
   setTotalHoursValue,
+  showEmployee,
 } from "../../store/employeeSlice";
+import EmployeeModal from "../AddEmployeeModal/EmployeeModal";
+import DeleteEmployeeAlert from "../Alerts/DeleteEmployeeAlert/DeleteEmpAlert";
 import DeleteButton from "../Buttons/DeleteButton/DeleteButton";
 import EditButton from "../Buttons/EditButton/EditButton";
 import { TextInputForCell } from "../Inputs/TextInputForCell/TextInput";
@@ -23,6 +32,8 @@ function UserLine({
   refCol4 = null,
 }) {
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   function changeDayValue(employeeName, value, index) {
     dispatch(
@@ -64,13 +75,64 @@ function UserLine({
     );
   }
 
+  function hideEmployee() {
+    const result = confirm(
+      `Вы уверены, что хотите удалить сотрудника ${employee.name}`,
+    );
+
+    if (result) {
+      showHideAlert();
+      dispatch(hideEmployeeAction({ employeeName: employee.name }));
+    }
+  }
+
+  function renameEmployee(newName = "") {
+    dispatch(
+      renameEmployeeAction({ prevName: employee.name, newName: newName }),
+    );
+  }
+
+  function showHideModal() {
+    setShowModal((prev) => !prev);
+  }
+
+  function showHideAlert() {
+    setShowAlert((prev) => !prev);
+  }
+
+  function notDeleteEmployee() {
+    dispatch(showEmployee({ employeeName: employee.name }));
+  }
+
+  function deleteEmployee() {
+    dispatch(deleteEmployeeAction({ employeeName: employee.name }));
+  }
+
+  if (employee.isDeleted) {
+    return (
+      <>
+        <DeleteEmployeeAlert
+          onCancelFunction={notDeleteEmployee}
+          onSubmitFunction={deleteEmployee}
+          hideAlertFunction={showHideAlert}
+        />
+      </>
+    );
+  }
+
   return (
     <>
+      {showModal && (
+        <EmployeeModal
+          currentName={employee.name}
+          onSubmitFunction={renameEmployee}
+        />
+      )}
       <div className={styles.col_1}>
         <div className={styles.name_container}>
           <div className={styles.button_container}>
-            <DeleteButton />
-            <EditButton />
+            <DeleteButton onClickFunction={hideEmployee} />
+            <EditButton onClickFunction={showHideModal} />
           </div>
           <div
             className={styles.name}

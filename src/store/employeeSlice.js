@@ -19,12 +19,6 @@ const employeesSlice = createSlice({
       state.employees.push(action.payload);
     },
 
-    removeEmployee(state, action) {
-      return state.employees.filter(
-        (employee) => employee.name !== action.payload,
-      );
-    },
-
     setEmployeeDayValue(state, action) {
       state.employees.map((employee) => {
         if (employee.name == action.payload.name) {
@@ -154,6 +148,36 @@ const employeesSlice = createSlice({
         }
       });
     },
+
+    deleteEmployee(state, action) {
+      state.employees = state.employees.filter(
+        (emp) => emp.name !== action.payload.employeeName,
+      );
+    },
+
+    renameEmployee(state, action) {
+      state.employees.map((emp) => {
+        if (emp.name === action.payload.prevName) {
+          emp.name = action.payload.newName;
+        }
+      });
+    },
+
+    hideEmployee(state, action) {
+      state.employees.map((emp) => {
+        if (emp.name === action.payload.employeeName) {
+          emp.isDeleted = true;
+        }
+      });
+    },
+
+    showEmployee(state, action) {
+      state.employees.map((emp) => {
+        if (emp.name === action.payload.employeeName) {
+          emp.isDeleted = false;
+        }
+      });
+    },
   },
 });
 
@@ -174,4 +198,8 @@ export const {
   calculateBisTripDays,
   calculateNightHours,
   resizeArrays,
+  deleteEmployee,
+  renameEmployee,
+  hideEmployee,
+  showEmployee,
 } = employeesSlice.actions;
