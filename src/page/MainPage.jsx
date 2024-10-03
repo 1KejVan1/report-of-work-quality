@@ -17,7 +17,7 @@ import { resizeArrays } from "../store/employeeSlice";
 import styles from "./page.module.scss";
 
 function MainPage() {
-  const employees = useSelector((state) => state.employees.employees);
+  const employees = useSelector((state) => state.employees);
   const dispatch = useDispatch();
   const [graficDate, setGraficDate] = useState(new DateModel());
   const [deletedEmployees, setDeletedEmployees] = useState([]);
@@ -48,12 +48,12 @@ function MainPage() {
     setRefCol2Array(fillRefArray());
     setRefCol3Array(fillRefArray());
     setRefCol4Array(fillRefArray());
-  }, [employees]);
+  }, [employees.employees]);
 
   function fillRefArray() {
     const arr = [];
 
-    for (let i = 0; i < employees.length; i++) {
+    for (let i = 0; i < employees.employees.length; i++) {
       arr.push(React.createRef(null));
     }
 
@@ -212,7 +212,7 @@ function MainPage() {
               </div>
             </div>
             <div className={classNames(styles.row_3, styles.content)}>
-              {employees.map((emp = Employee(), index) => {
+              {employees.employees.map((emp = Employee(), index) => {
                 return (
                   <UserLine
                     key={emp.name}
@@ -254,7 +254,9 @@ function MainPage() {
                     {daysNames.map((day) => {
                       return (
                         <TableCell key={day.eng_title}>
-                          <TextInputForCell value="" />
+                          <TextInputForCell
+                            value={employees.totalDays[day.eng_title]}
+                          />
                         </TableCell>
                       );
                     })}
@@ -270,7 +272,9 @@ function MainPage() {
                     {hoursNames.map((hour) => {
                       return (
                         <TableCell key={hour.eng_title}>
-                          <TextInputForCell value="" />
+                          <TextInputForCell
+                            value={employees.totalHours[hour.eng_title]}
+                          />
                         </TableCell>
                       );
                     })}

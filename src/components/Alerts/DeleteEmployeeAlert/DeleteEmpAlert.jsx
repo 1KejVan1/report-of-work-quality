@@ -10,12 +10,13 @@ function DeleteEmployeeAlert({
   hideAlertFunction = Function.prototype,
 }) {
   const progressbar = useRef(null);
-  const [tickValue] = useState(25);
+  const [tickValue] = useState(1);
+  const [delay] = useState(50);
   const [intervalIds, setIntervalIds] = useState([]);
 
   useEffect(() => {
     if (intervalIds.length === 0) {
-      setIntervalIds((prev) => prev.push(setInterval(progressTick, 1000)));
+      setIntervalIds((prev) => prev.push(setInterval(progressTick, delay)));
     }
   }, []);
 

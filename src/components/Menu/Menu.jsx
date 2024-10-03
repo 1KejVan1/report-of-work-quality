@@ -13,6 +13,8 @@ import {
   calculateBisTripDays,
   calculateNightHours,
   calculateSickDays,
+  calculateTotalDays,
+  calculateTotalHours,
   calculateVacationsDays,
   calculateWeekendsDays,
 } from "../../store/employeeSlice";
@@ -39,6 +41,8 @@ function Menu() {
     dispatch(calculateSickDays());
     dispatch(calculateBisTripDays());
     dispatch(calculateNightHours());
+    dispatch(calculateTotalDays());
+    dispatch(calculateTotalHours());
   }
 
   function addEmployee(employeeName) {

@@ -178,6 +178,34 @@ const employeesSlice = createSlice({
         }
       });
     },
+
+    calculateTotalDays(state) {
+      const daysNames = Object.keys(state.totalDays);
+
+      for (let i = 0; i < daysNames.length; i++) {
+        const dayName = daysNames[i];
+        let count = 0;
+
+        for (let k = 0; k < state.employees.length; k++) {
+          count += state.employees[k].days[dayName];
+        }
+        state.totalDays[dayName] = count;
+      }
+    },
+
+    calculateTotalHours(state) {
+      const hoursNames = Object.keys(state.totalHours);
+
+      for (let i = 0; i < hoursNames.length; i++) {
+        const hourName = hoursNames[i];
+        let count = 0;
+
+        for (let k = 0; k < state.employees.length; k++) {
+          count += state.employees[k].hours[hourName];
+        }
+        state.totalHours[hourName] = count;
+      }
+    },
   },
 });
 
@@ -202,4 +230,6 @@ export const {
   renameEmployee,
   hideEmployee,
   showEmployee,
+  calculateTotalDays,
+  calculateTotalHours,
 } = employeesSlice.actions;

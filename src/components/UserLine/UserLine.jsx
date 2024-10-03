@@ -33,7 +33,6 @@ function UserLine({
 }) {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
 
   function changeDayValue(employeeName, value, index) {
     dispatch(
@@ -81,7 +80,6 @@ function UserLine({
     );
 
     if (result) {
-      showHideAlert();
       dispatch(hideEmployeeAction({ employeeName: employee.name }));
     }
   }
@@ -94,10 +92,6 @@ function UserLine({
 
   function showHideModal() {
     setShowModal((prev) => !prev);
-  }
-
-  function showHideAlert() {
-    setShowAlert((prev) => !prev);
   }
 
   function notDeleteEmployee() {
@@ -114,7 +108,6 @@ function UserLine({
         <DeleteEmployeeAlert
           onCancelFunction={notDeleteEmployee}
           onSubmitFunction={deleteEmployee}
-          hideAlertFunction={showHideAlert}
         />
       </>
     );
